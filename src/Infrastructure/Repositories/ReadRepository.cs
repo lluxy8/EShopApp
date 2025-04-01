@@ -16,9 +16,8 @@ namespace Infrastructure.Repositories
     {
         public ReadRepository(ReadDbContext context) : base(context) { }
 
-        public Task<bool> AnyAsync(Expression<Func<T, bool>> predicate) =>
-            _context.Set<T>().AsNoTracking().AnyAsync(predicate);
-
+        public Task<bool> AnyAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellation = default) =>
+            _context.Set<T>().AsNoTracking().AnyAsync(predicate, cancellation);
 
         public async Task<List<T>> GetAllAsync(CancellationToken cancellation = default) =>
             await _context.Set<T>().AsNoTracking().ToListAsync(cancellation);

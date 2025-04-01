@@ -14,10 +14,8 @@
     <Folder Include="Features\Order\" />
     <Folder Include="Features\Admin\" />
     <Folder Include="Features\Category\" />
-    <Folder Include="Features\User\Commands\" />
     <Folder Include="Features\User\Commands\UserLogin\" />
     <Folder Include="MapperProfiles\" />
-    <Folder Include="Validations\" />
   </ItemGroup>
 
   <ItemGroup>

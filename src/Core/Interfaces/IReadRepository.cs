@@ -13,6 +13,6 @@ namespace Core.Interfaces
     {
         Task<T?> GetByIdAsync(Guid id, CancellationToken cancellation = default);
         Task<List<T>> GetAllAsync( CancellationToken cancellation = default);
-        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellation = default);
     }
 }
