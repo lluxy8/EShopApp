@@ -1,4 +1,6 @@
-﻿namespace Core.Entities.Read
+﻿using Core.Common.BaseClasses;
+
+namespace Core.Entities.Read
 {
     public class OrderView
     {
@@ -10,14 +12,13 @@
         public Guid AddressId { get; set; }
         public string Description { get; set; } = string.Empty;
         public required string Status { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 
-
-    // join
-    public class OrderProductView
+    public class OrderProductView : BaseEntity
     {
-        public Guid Id { get; set; }
-        public required string Name { get; set; }
+        public Guid OrderId { get; set; }
+        public required string ProductName { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
     }

@@ -8,7 +8,7 @@ namespace Core.Entities.Read
         public required string UserFullName { get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; }
-        public virtual ICollection<OrderView> Orders { get; set; } = [];
-        public virtual ICollection<ProductView> Products { get; set; } = [];
+        public ICollection<OrderView> Orders { get; set; } = [];
+        public ICollection<ProductView> Products { get; set; } = [];
     }
 }

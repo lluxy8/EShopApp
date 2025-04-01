@@ -4,6 +4,7 @@
     {
         public Guid UserId { get; set; }
         public required User User { get; set; }
+        public required string Title { get; set; }
         public int AddressType { get; set; }
         public string AdressLine1 { get; set; } = string.Empty;
         public string AdressLine2 { get; set; } = string.Empty;

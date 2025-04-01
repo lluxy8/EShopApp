@@ -10,6 +10,7 @@ namespace Core.Entities.Read
     public class AddressView : BaseEntity
     {
         public required string UserFullName { get; set; }
+        public required string Title { get; set; }
         public required string AdressType { get; set; }
         public string AdressLine1 { get; set; } = string.Empty;
         public string AdressLine2 { get; set; } = string.Empty;

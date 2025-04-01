@@ -33,8 +33,8 @@ namespace Infrastructure.Data.Configurations.Write
                 .HasMaxLength(MaxLengths.Address.ZipCode);
 
             builder.HasOne(a => a.User)
-                .WithOne(u => u.Address)
-                .HasForeignKey<Address>(a => a.UserId);
+                .WithMany(x => x.Addresses)
+                .HasForeignKey(a => a.UserId);
         }
     }
 }

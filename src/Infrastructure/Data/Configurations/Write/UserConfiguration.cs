@@ -39,9 +39,9 @@ namespace Infrastructure.Data.Configurations.Write
                 .IsRequired()
                 .HasMaxLength(50); 
 
-            builder.HasOne(u => u.Address)
+            builder.HasMany(u => u.Addresses)
                 .WithOne(a => a.User)
-                .HasForeignKey<Address>(a => a.UserId);
+                .HasForeignKey(a => a.UserId);
 
             builder.HasOne(u => u.Shop)
                 .WithOne(s => s.User)

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Configurations\Read\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 
