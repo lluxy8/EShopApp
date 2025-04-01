@@ -5,10 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Data.Configurations.Write
 {
-    public class OrderProductConfiguration : IEntityTypeConfiguration<OrderProduct>
+    public class OrderProductConfiguration : BaseEntityConfiguration<OrderProduct>
     {
-        public void Configure(EntityTypeBuilder<OrderProduct> builder)
+
+        public override void Configure(EntityTypeBuilder<OrderProduct> builder)
         {
+            base.Configure(builder);
+
             builder.HasKey(op => new { op.OrderId, op.ProductId });
 
             builder.Property(op => op.Quantity)

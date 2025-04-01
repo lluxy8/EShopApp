@@ -1,5 +1,6 @@
 ﻿using Core.Common.Constants;
 using Core.Entities.Write;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,9 @@ namespace Infrastructure.Data.Configurations.Write
             builder.HasMany(o => o.OrderProducts)
                 .WithOne(op => op.Order)
                 .HasForeignKey(op => op.OrderId);
+
+            builder.Property(p => p.TotalPrice)
+                .HasColumnType("decimal(18,2)");
         }
     }
 }

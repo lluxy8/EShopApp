@@ -5,11 +5,11 @@ using Core.Entities.Write;
 
 namespace Infrastructure.Data.Configurations.Write
 {
-    public class AddressConfiguration : IEntityTypeConfiguration<Address>
+    public class AddressConfiguration : BaseEntityConfiguration<Address>
     {
-        public void Configure(EntityTypeBuilder<Address> builder)
+        public override void Configure(EntityTypeBuilder<Address> builder)
         {
-            builder.HasKey(a => a.UserId);
+            base.Configure(builder);
 
             builder.Property(a => a.AddressType)
                 .IsRequired();

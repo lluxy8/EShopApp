@@ -9,9 +9,9 @@ namespace Infrastructure.Data.Configurations.Write
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
             builder.HasKey(e => e.Id);
+
             builder.Property(e => e.CreatedDate)
-                   .IsRequired()
-                   .HasDefaultValueSql("GETUTCDATE()");
+                   .IsRequired();
         }
     }
 }

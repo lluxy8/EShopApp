@@ -1,6 +1,8 @@
-﻿namespace Core.Entities.Write
+﻿using Core.Common.BaseClasses;
+
+namespace Core.Entities.Write
 {
-    public class Address
+    public class Address : BaseEntity
     {
         public Guid UserId { get; set; }
         public required User User { get; set; }

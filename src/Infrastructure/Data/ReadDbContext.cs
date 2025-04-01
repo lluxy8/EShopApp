@@ -12,6 +12,7 @@ namespace Infrastructure.Data
         public DbSet<AdminView> Admins { get; set; }
         public DbSet<CategoryView> Categories { get; set; }
         public DbSet<OrderView> Orders { get; set; }
+        public DbSet<OrderProductView> OrderProducts { get; set; }
         public DbSet<ProductView> Products { get; set; }
         public DbSet<ShopView> Shops { get; set; }
         public DbSet<UserView> Users { get; set; }

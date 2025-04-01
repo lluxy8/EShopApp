@@ -1,4 +1,5 @@
-﻿using Core.Entities.Write;
+﻿using Core.Entities.Read;
+using Core.Entities.Write;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Infrastructure.Data
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Shop> Shops { get; set; }
         public DbSet<User> Users { get; set; }
@@ -30,5 +32,6 @@ namespace Infrastructure.Data
 
         private static bool WriteDbConfigurations(Type type) =>
             type.FullName?.Contains("Write") ?? false;
+
     }
 }
