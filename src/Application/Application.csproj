@@ -8,7 +8,14 @@
 
   <ItemGroup>
     <Folder Include="Configuration\" />
-    <Folder Include="Features\" />
+    <Folder Include="Features\Address\" />
+    <Folder Include="Features\Shop\" />
+    <Folder Include="Features\Product\" />
+    <Folder Include="Features\Order\" />
+    <Folder Include="Features\Admin\" />
+    <Folder Include="Features\Category\" />
+    <Folder Include="Features\User\Commands\" />
+    <Folder Include="Features\User\Commands\UserLogin\" />
     <Folder Include="MapperProfiles\" />
     <Folder Include="Validations\" />
   </ItemGroup>
