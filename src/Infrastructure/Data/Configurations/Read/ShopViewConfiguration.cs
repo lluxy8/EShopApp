@@ -14,13 +14,14 @@ namespace Infrastructure.Data.Configurations.Read
     {
         public override void Configure(EntityTypeBuilder<ShopView> builder)
         {
-            builder.ToView("vw_Shops");
-
             builder.Property(s => s.Name)
                 .HasMaxLength(MaxLengths.Shop.Name);
 
             builder.Property(s => s.Description)
                 .HasMaxLength(MaxLengths.Shop.Description);
+
+            builder.Property(s => s.Name).HasColumnName("ShopName");
+            builder.Property(s => s.UserId).HasColumnName("OwnerId");
 
             builder.HasIndex(s => s.UserId);
             builder.HasIndex(s => s.Name);

@@ -24,15 +24,18 @@ namespace Infrastructure.Data.Configurations.Write
 
             builder.HasOne(o => o.Shop)
                 .WithMany(s => s.Orders)
-                .HasForeignKey(o => o.ShopId);
+                .HasForeignKey(o => o.ShopId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(o => o.User)
                 .WithMany()
-                .HasForeignKey(o => o.UserId);
+                .HasForeignKey(o => o.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(o => o.Address)
                 .WithMany()
-                .HasForeignKey(o => o.AddressId);
+                .HasForeignKey(o => o.AddressId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(o => o.OrderProducts)
                 .WithOne(op => op.Order)
