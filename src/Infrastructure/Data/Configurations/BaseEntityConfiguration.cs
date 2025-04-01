@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Data.Configurations.Write
+namespace Infrastructure.Data.Configurations
 {
     public class BaseEntityConfiguration<T> : IEntityTypeConfiguration<T> where T : BaseEntity
     {

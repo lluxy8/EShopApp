@@ -2,7 +2,7 @@
 
 namespace Core.Entities.Read
 {
-    public class OrderView
+    public class OrderView : BaseEntity
     {
         public Guid ShopId { get; set; }
         public required string ShopName { get; set; }

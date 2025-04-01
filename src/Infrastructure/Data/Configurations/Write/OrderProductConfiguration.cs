@@ -1,6 +1,5 @@
 ﻿using Core.Common.Constants;
 using Core.Entities.Write;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Data.Configurations.Write
@@ -16,7 +15,7 @@ namespace Infrastructure.Data.Configurations.Write
 
             builder.Property(op => op.Quantity)
                 .IsRequired()
-                .HasAnnotation("Range", new { Min = 1, MaxLengths.OrderProduct.Quantity });
+                .HasMaxLength(MaxLengths.OrderProduct.Quantity);
 
             builder.HasOne(op => op.Product)
                 .WithMany()

@@ -15,6 +15,12 @@ namespace Infrastructure.Data.Configurations.Write
         {
             base.Configure(builder);
 
+            builder.HasIndex(u => u.PhoneNumber)
+                .IsUnique();
+
+            builder.HasIndex(u => u.Email)
+                .IsUnique();
+
             builder.Property(u => u.Name)
                 .IsRequired()
                 .HasMaxLength(MaxLengths.User.Name);

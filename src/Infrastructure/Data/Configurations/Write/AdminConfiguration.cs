@@ -10,6 +10,9 @@ namespace Infrastructure.Data.Configurations.Write
         {
             base.Configure(builder);
 
+            builder.HasIndex(a => a.Username)
+                .IsUnique();
+
             builder.Property(a => a.Username)
                 .IsRequired()
                 .HasMaxLength(MaxLengths.User.Name);

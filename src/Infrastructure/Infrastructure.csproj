@@ -12,9 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Configurations\Read\" />
-    <Folder Include="Migrations\Write\" />
     <Folder Include="Migrations\Read\" />
+    <Folder Include="Migrations\Write\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 
