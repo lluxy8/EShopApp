@@ -12,11 +12,9 @@
 
   <ItemGroup>
     <Folder Include="Common\Exceptions\" />
-    <Folder Include="Common\Constants\" />
     <Folder Include="Common\Dtos\" />
-    <Folder Include="Common\Enums\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>

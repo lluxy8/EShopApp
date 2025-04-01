@@ -14,10 +14,12 @@ namespace Infrastructure.Configuration
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<ReadDbContext>(options => options
+                .UseSqlServer(configuration.GetConnectionString("ReadDb"))
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(connectionString));
+            services.AddDbContext<WriteDbContext>(options => options
+                .UseSqlServer(configuration.GetConnectionString("WriteDb")));
 
             return services;
         }
