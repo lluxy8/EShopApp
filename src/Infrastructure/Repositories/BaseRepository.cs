@@ -19,7 +19,10 @@ namespace Infrastructure.Repositories
             CancellationToken cancellation) =>
             await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(predicate, cancellation);
 
-        public IQueryable<T> GetQueryable() =>
-            _context.Set<T>().AsQueryable().AsNoTracking();
+        public IQueryable<T> GetQueryable(bool tracking = false)
+        {
+            var query = _context.Set<T>().AsQueryable();
+            return tracking ? query : query.AsNoTracking();
+        }
     }
 }
