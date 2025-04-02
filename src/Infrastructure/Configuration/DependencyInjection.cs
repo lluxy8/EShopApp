@@ -2,6 +2,7 @@
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
+using Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +30,8 @@ namespace Infrastructure.Configuration
                 services.Decorate(readRepoInterface, cachedRepoType);
             }
 
-            services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
+            services.AddScoped<IUnitOfWork, ReadDbUnitOfWork>();
+            services.AddScoped<IUnitOfWork, WriteDbUnitOFWork>();
 
             services.AddDbContext<ReadDbContext>(options => options
                 .UseSqlServer(configuration.GetConnectionString("ReadDb"))
