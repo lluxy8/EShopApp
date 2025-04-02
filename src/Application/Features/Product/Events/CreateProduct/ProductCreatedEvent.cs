@@ -1,5 +1,4 @@
-﻿using Core.Entities.Read;
-using MediatR;
+﻿using MediatR;
 
 namespace Application.Features.Product.Events.CreateProduct
 {

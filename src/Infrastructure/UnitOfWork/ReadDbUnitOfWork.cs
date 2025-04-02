@@ -4,18 +4,12 @@ using Infrastructure.Data;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.UnitOfWork
 {
-    public sealed class ReadDbUnitOfWork : IUnitOfWork
+    public sealed class ReadDbUnitOfWork : IReadDbUnitOfWork
     {
         private readonly ReadDbContext _readContext;
-        // private readonly WriteDbContext _writeContext;
         private IDbContextTransaction _transaction;
         private readonly IMediator _mediator;
         private readonly Dictionary<Type, object> _repositories = new();
@@ -23,7 +17,6 @@ namespace Infrastructure.UnitOfWork
         public ReadDbUnitOfWork(ReadDbContext readContext, WriteDbContext writeContext)
         {
             _readContext = readContext;
-            // _writeContext = writeContext;
         }
 
 
@@ -36,10 +29,6 @@ namespace Infrastructure.UnitOfWork
             _repositories.Add(typeof(T), newRepo);
             return newRepo;
         }
-
-
-        public IWriteRepository<T> WriteRepository<T>() where T : BaseEntity
-            => throw new NotImplementedException();
 
         public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
         {
@@ -71,7 +60,6 @@ namespace Infrastructure.UnitOfWork
         public void Dispose()
         {
             _transaction?.Dispose();
-            // _readContext?.Dispose();
             _readContext?.Dispose();
             GC.SuppressFinalize(this);
         }

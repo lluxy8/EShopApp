@@ -13,20 +13,17 @@ namespace Application.Features.Product.Commands.CreateProduct
             : IRequestHandler<CreateProductCommand, Result<Guid>>
     {
         private readonly WriteDbUnitOFWork _writeUow;
-        private readonly ReadDbUnitOfWork _readUow;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
         private readonly ILogger<CreateProductCommandHandler> _logger;
 
         public CreateProductCommandHandler(
             WriteDbUnitOFWork writeUow,
-            ReadDbUnitOfWork readUow,
             IMapper mapper,
             ILogger<CreateProductCommandHandler> logger,
             IMediator mediator)
         {
             _writeUow = writeUow;
-            _readUow = readUow;
             _mapper = mapper;
             _logger = logger;
             _mediator = mediator;
@@ -34,16 +31,14 @@ namespace Application.Features.Product.Commands.CreateProduct
 
         public async Task<Result<Guid>> Handle(CreateProductCommand request, CancellationToken cancellation)
         {
-            var shop = await _readUow.ReadRepository<Shop>()
-                .GetByIdAsync(request.ShopId, cancellation);
+            var category = await _writeUow.WriteRepository<Category>()
+                .GetByConditionAsync(x => x.Id == request.CategoryId, cancellation);
 
-            var category = await _readUow.ReadRepository<Category>()
-                .GetByIdAsync(request.CategoryId, cancellation);
+            var shop = await _writeUow.WriteRepository<Shop>()
+                .GetByConditionAsync(x => x.Id == request.ShopId, cancellation);
 
-            if (category is null)
-                return Result<Guid>.Failure("Category not found");
-            else if (shop is null)
-                return Result<Guid>.Failure("Shop not found");
+            if (category == null || shop == null)
+                return Result<Guid>.Failure("Category or Shop not found.");
 
             var id = Guid.NewGuid();
             var product = _mapper.Map<Core.Entities.Write.Product>(request);

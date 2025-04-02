@@ -30,8 +30,8 @@ namespace Infrastructure.Configuration
                 services.Decorate(readRepoInterface, cachedRepoType);
             }
 
-            services.AddScoped<IUnitOfWork, ReadDbUnitOfWork>();
-            services.AddScoped<IUnitOfWork, WriteDbUnitOFWork>();
+            services.AddScoped<IReadDbUnitOfWork, ReadDbUnitOfWork>();
+            services.AddScoped<IWriteDbUnitOfWork, WriteDbUnitOFWork>();
 
             services.AddDbContext<ReadDbContext>(options => options
                 .UseSqlServer(configuration.GetConnectionString("ReadDb"))

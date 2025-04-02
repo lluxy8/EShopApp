@@ -4,17 +4,11 @@ using Infrastructure.Data;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.UnitOfWork
 {
-    public sealed class WriteDbUnitOFWork : IUnitOfWork
+    public sealed class WriteDbUnitOFWork : IWriteDbUnitOfWork
     {
-        // private readonly ReadDbContext _readContext;
         private readonly WriteDbContext _writeContext;
         private IDbContextTransaction _transaction;
         private readonly IMediator _mediator;
@@ -22,14 +16,8 @@ namespace Infrastructure.UnitOfWork
 
         public WriteDbUnitOFWork(ReadDbContext readContext, WriteDbContext writeContext)
         {
-            // _readContext = readContext;
             _writeContext = writeContext;
         }
-
-
-        public IReadRepository<T> ReadRepository<T>() where T : BaseEntity
-            => throw new NotImplementedException();
-
 
         public IWriteRepository<T> WriteRepository<T>() where T : BaseEntity
         {
