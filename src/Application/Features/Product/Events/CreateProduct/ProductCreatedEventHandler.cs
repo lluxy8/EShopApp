@@ -17,33 +17,16 @@ namespace Application.Features.Product.Events.CreateProduct
         private readonly ILogger<ProductCreatedEventHandler> _logger;
 
         public ProductCreatedEventHandler(
-            ReadDbUnitOfWork uow, 
             IMapper mapper,
-            ReadDbContext context,
-            ILogger<ProductCreatedEventHandler> logger)
+            ReadDbContext context)
         {
-            _uow = uow;
             _mapper = mapper;
             _context = context;
-            _logger = logger;
         }
         public async Task Handle(ProductCreatedEvent notification, CancellationToken cancellationToken)
         {
-            try
-            {
-                await _uow.BeginTransactionAsync(cancellationToken);
-
-                var product = _mapper.Map<ProductView>(notification);
-                await _context.AddAsync(product, cancellationToken);
-
-                await _uow.CommitAsync(cancellationToken);
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError("Product creation failed in read DB:" + ex);
-                await _uow.RollbackAsync(cancellationToken);
-                throw;
-            }
+            var product = _mapper.Map<ProductView>(notification);
+            await _context.AddAsync(product, cancellationToken);
         }
     }
 }

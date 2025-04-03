@@ -3,6 +3,7 @@ using AutoMapper;
 using Core.Common.Results;
 using Core.Entities.Read;
 using Core.Entities.Write;
+using Core.Interfaces;
 using Infrastructure.UnitOfWork;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -31,34 +32,42 @@ namespace Application.Features.Product.Commands.CreateProduct
 
         public async Task<Result<Guid>> Handle(CreateProductCommand request, CancellationToken cancellation)
         {
-            var category = await _writeUow.WriteRepository<Category>()
-                .GetByConditionAsync(x => x.Id == request.CategoryId, cancellation);
+            ArgumentNullException.ThrowIfNull(request);
 
-            var shop = await _writeUow.WriteRepository<Shop>()
-                .GetByConditionAsync(x => x.Id == request.ShopId, cancellation);
+            var category = await _writeUow.WriteRepository<Category>()
+                .GetByConditionAsync(c => c.Id == request.CategoryId, cancellation);
+
+            var shop = await _writeUow.WriteRepository<Core.Entities.Write.Shop>()
+                .GetByConditionAsync(s => s.Id == request.ShopId, cancellation);
 
             if (category == null || shop == null)
-                return Result<Guid>.Failure("Category or Shop not found.");
+                return Result<Guid>.Failure("Category or Shop not found");
 
-            var id = Guid.NewGuid();
             var product = _mapper.Map<Core.Entities.Write.Product>(request);
-            product.Id = id;
+            product.Id = Guid.NewGuid();
 
             await _writeUow.WriteRepository<Core.Entities.Write.Product>()
                 .AddAsync(product, cancellation);
 
-            var @event = _mapper.Map<ProductCreatedEvent>(product) 
-                with
-            {
-                CategoryName = product.Category.Name,
-                ShopName = product.Shop.Name
-            };
+            var @event = new ProductCreatedEvent(
+                product.Id,
+                product.CategoryId,
+                category.Name, 
+                product.ShopId,
+                shop.Name,    
+                product.Name,
+                product.Description,
+                product.Stock,
+                product.Price,
+                product.CreatedDate,
+                product.UpdatedDate
+            );
 
             await _mediator.Publish(@event, cancellation);
 
-            _logger.LogInformation("Product created: " + id);
+            _logger.LogInformation("Product Created with ID: " + product.Id);
 
-            return Result<Guid>.Success(id);
+            return Result<Guid>.Success(product.Id);
         }
     }
 }

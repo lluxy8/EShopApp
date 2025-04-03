@@ -30,6 +30,10 @@ namespace Infrastructure.Configuration
                 services.Decorate(readRepoInterface, cachedRepoType);
             }
 
+            services.AddScoped(typeof(IBaseRepository<>));
+            services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
+            services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
+
             services.AddScoped<IReadDbUnitOfWork, ReadDbUnitOfWork>();
             services.AddScoped<IWriteDbUnitOfWork, WriteDbUnitOFWork>();
 

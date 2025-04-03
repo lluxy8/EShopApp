@@ -15,7 +15,7 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<T?> GetByConditionAsync(Expression<Func<T, bool>> predicate, 
+        public virtual async Task<T?> GetByConditionAsync(Expression<Func<T, bool>> predicate, 
             CancellationToken cancellation) =>
             await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(predicate, cancellation);
 

@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Core.Common.Results
 {
-    public class Result<T>
+    public interface IResult
     {
-        public bool IsSuccess { get; }
-        public string? Message { get; } 
+        bool IsSuccess { get; }
+        string Message { get; }
+    }
+    public class Result<T> : IResult where T : class
+    {
         public T? Data { get; }         
 
         private Result(T data)

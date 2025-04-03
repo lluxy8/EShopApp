@@ -14,7 +14,6 @@
     <Folder Include="Features\Admin\" />
     <Folder Include="Features\Category\" />
     <Folder Include="Features\User\Commands\" />
-    <Folder Include="MapperProfiles\" />
   </ItemGroup>
 
   <ItemGroup>

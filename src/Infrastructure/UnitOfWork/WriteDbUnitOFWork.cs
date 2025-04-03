@@ -59,7 +59,6 @@ namespace Infrastructure.UnitOfWork
         public void Dispose()
         {
             _transaction?.Dispose();
-            // _readContext?.Dispose();
             _writeContext?.Dispose();
             GC.SuppressFinalize(this);
         }
