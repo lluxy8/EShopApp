@@ -27,7 +27,10 @@ namespace Application.Behaviors.NotificationPipeline
             _uow = uow;
             _logger = logger;
         }
-        public async Task Handle(TNotification notification, CancellationToken cancellationToken, Func<Task> next)
+        public async Task Handle(
+            TNotification notification, 
+            CancellationToken cancellationToken, 
+            Func<Task> next)
         {
             try
             {

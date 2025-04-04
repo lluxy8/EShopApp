@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Behaviors
+namespace Application.Behaviors.RequestPipeline
 {
     public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
@@ -24,12 +24,10 @@ namespace Application.Behaviors
 
                 if (typeof(TRequest).Name.EndsWith("Command"))
                 {
-                    if (response?.GetType().IsGenericType == true &&
-                        response.GetType().GetGenericTypeDefinition() == typeof(Result<>))
+                    if (response is IResult result)
                     {
-                        dynamic dynamicResult = response;
                                                                   
-                        if (dynamicResult.IsSuccess)
+                        if (result.IsSuccess)
                             await _uow.CommitAsync(cancellation);
                         else
                             await _uow.RollbackAsync(cancellation);

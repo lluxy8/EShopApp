@@ -9,10 +9,12 @@ namespace Core.Common.Results
     public interface IResult
     {
         bool IsSuccess { get; }
-        string Message { get; }
+        string? Message { get; } 
     }
-    public class Result<T> : IResult where T : class
+    public class Result<T> : IResult 
     {
+        public bool IsSuccess { get; }
+        public string? Message { get; } 
         public T? Data { get; }         
 
         private Result(T data)
@@ -30,9 +32,9 @@ namespace Core.Common.Results
         }
 
         public static Result<T> Success(T data)
-            => new Result<T>(data);
+            => new(data);
 
         public static Result<T> Failure(string message)
-            => new Result<T>(message);
+            => new(message);
     }
 }
